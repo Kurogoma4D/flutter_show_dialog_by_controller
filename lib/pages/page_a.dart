@@ -3,42 +3,18 @@ import 'package:flutter_show_dialog/controllers/page_a_controller.dart';
 import 'package:provider/provider.dart';
 
 class PageA extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  const PageA._({Key key}) : super(key: key);
+
+  static Widget wrapped() {
     return ChangeNotifierProvider<PageAController>(
-      create: (_) => PageAController(
+      create: (context) => PageAController(
         locator: context.read,
         showLoginDialog: _showDialog,
       ),
       lazy: false,
-      child: const _PageA(),
+      child: const PageA._(),
     );
   }
-
-  void _showDialog(BuildContext context) async {
-    await showDialog(
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          title: const Text('ダイアログ'),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('ONE'),
-            ),
-            FlatButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('TWO'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _PageA extends StatelessWidget {
-  const _PageA({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,4 +30,25 @@ class _PageA extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showDialog(BuildContext context) async {
+  await showDialog(
+    context: context,
+    builder: (_) {
+      return AlertDialog(
+        title: const Text('ダイアログ'),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('ONE'),
+          ),
+          FlatButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('TWO'),
+          ),
+        ],
+      );
+    },
+  );
 }

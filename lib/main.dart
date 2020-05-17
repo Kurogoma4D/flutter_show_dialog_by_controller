@@ -30,12 +30,12 @@ class MyApp extends StatelessWidget {
         ),
         navigatorKey: navigatorKey,
         routes: <String, Widget>{
-          '/a': PageA(),
+          '/a': PageA.wrapped(),
           '/b': PageB(),
         }.map(
           (route, child) => MapEntry(route, (BuildContext context) => child),
         ),
-        home: PageA(),
+        home: PageA.wrapped(),
       ),
     );
   }
